@@ -183,10 +183,6 @@ components:
           type: string
           format: date-time
           description: Fecha y hora de la transacción
-        relatedTransactionId:
-          type: string
-          nullable: true
-          description: ID de transacción relacionada (si aplica)
 
     TransactionRequest:
       type: object
@@ -215,10 +211,6 @@ components:
         description:
           type: string
           description: Descripción de la transacción
-        relatedTransactionId:
-          type: string
-          nullable: true
-          description: ID de transacción relacionada (si aplica)
 
     UpdateTransactionStatusRequest:
       type: object

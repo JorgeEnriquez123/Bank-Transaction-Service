@@ -26,7 +26,6 @@ public class Transaction {
     private TransactionStatus status;
     private String description;
     private LocalDateTime transactionDate;
-    private String relatedTransactionId;
 
     public enum TransactionType {
         DEBIT,

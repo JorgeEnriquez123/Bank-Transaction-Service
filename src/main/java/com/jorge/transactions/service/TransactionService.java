@@ -1,11 +1,14 @@
 package com.jorge.transactions.service;
 
+import com.jorge.transactions.model.TransactionRequest;
+import com.jorge.transactions.model.TransactionResponse;
+import com.jorge.transactions.model.UpdateTransactionStatusRequest;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface TransactionService {
-   /* Flux<TransactionResponse> getTransactionsByBankProductId(String bankProductId);
+    Flux<TransactionResponse> getTransactionsByBankProductId(String bankProductId);
     Mono<TransactionResponse> getTransactionById(String id);
-    Mono<TransactionResponse> createTransaction(TransactionRequest transaction);
-    Mono<TransactionResponse> updateTransactionStatusByTransactionId(String transactionId, UpdateTransactionStatusRequest updateTransactionStatusRequest);*/
+    Mono<TransactionResponse> createTransaction(TransactionRequest transactionRequest);
+    Mono<TransactionResponse> updateTransactionStatusByTransactionId(String transactionId, UpdateTransactionStatusRequest updateTransactionStatusRequest);
 }
