@@ -117,15 +117,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /transactions/bank-product/{bankProductId}:
+  /transactions/account-number/{accountNumber}:
     get:
       summary: Obtiene todas las transacciones asociadas a un producto bancario.
       tags:
         - Transactions
-      operationId: getTransactionsByBankProductId
+      operationId: getTransactionsByAccountNumber
       parameters:
         - in: path
-          name: bankProductId
+          name: accountNumber
           schema:
             type: string
           required: true

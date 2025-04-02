@@ -27,8 +27,8 @@ public class TransactionApiDelegateImpl implements TransactionsApiDelegate {
     }
 
     @Override
-    public Flux<TransactionResponse> getTransactionsByBankProductId(String bankProductId, ServerWebExchange exchange) {
-        return transactionService.getTransactionsByAccountNumber(bankProductId);
+    public Flux<TransactionResponse> getTransactionsByAccountNumber(String accountNumber, ServerWebExchange exchange) {
+        return transactionService.getTransactionsByAccountNumber(accountNumber);
     }
 
     @Override
