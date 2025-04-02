@@ -18,8 +18,10 @@ import java.time.LocalDateTime;
 public class Transaction {
     @Id
     private String id;
-    // Transaction related to a Product of the bank | Can be ACCOUNT_ID, CREDIT_CARD_ID OR CREDIT_ID
-    private String bankProductId;
+    private String accountNumber;
+    //Credit field
+    private String creditId;
+
     private TransactionType transactionType;
     private CurrencyType currencyType;
     private BigDecimal amount;
@@ -33,6 +35,7 @@ public class Transaction {
         DEPOSIT,
         WITHDRAWAL,
         CREDIT_PAYMENT,
+        CREDIT_DEPOSIT,
         CREDIT_CARD_CONSUMPTION,
         CREDIT_CARD_PAYMENT
     }

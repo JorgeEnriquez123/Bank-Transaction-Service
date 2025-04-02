@@ -23,8 +23,8 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
 
     @Override
-    public Flux<TransactionResponse> getTransactionsByBankProductId(String bankProductId) {
-        return transactionRepository.findByBankProductId(bankProductId)
+    public Flux<TransactionResponse> getTransactionsByAccountNumber(String accountNumber) {
+        return transactionRepository.findByAccountNumber(accountNumber)
                 .map(transactionMapper::mapToTransactionResponse);
     }
 
@@ -40,7 +40,6 @@ public class TransactionServiceImpl implements TransactionService {
     public Mono<TransactionResponse> createTransaction(TransactionRequest transactionRequest) {
         Transaction transaction = transactionMapper.mapToTransaction(transactionRequest);
         transaction.setTransactionDate(LocalDateTime.now());
-        transaction.setStatus(Transaction.TransactionStatus.PENDING);
 
         return transactionRepository.save(transaction)
                 .map(transactionMapper::mapToTransactionResponse);

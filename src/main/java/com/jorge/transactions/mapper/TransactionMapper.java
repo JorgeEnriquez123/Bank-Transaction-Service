@@ -11,18 +11,26 @@ import java.time.LocalDateTime;
 @Component
 public class TransactionMapper {
     public Transaction mapToTransaction(TransactionRequest transactionRequest) {
-        return Transaction.builder()
-                .bankProductId(transactionRequest.getBankProductId())
-                .transactionType(Transaction.TransactionType.valueOf(transactionRequest.getTransactionType().name()))
-                .currencyType(Transaction.CurrencyType.valueOf(transactionRequest.getCurrencyType().name()))
-                .amount(transactionRequest.getAmount())
-                .description(transactionRequest.getDescription())
-                .build();
+        Transaction transaction = new Transaction();
+        transaction.setAccountNumber(transactionRequest.getAccountNumber());
+        transaction.setTransactionType(Transaction.TransactionType.valueOf(transactionRequest.getTransactionType().name()));
+        transaction.setCurrencyType(Transaction.CurrencyType.valueOf(transactionRequest.getCurrencyType().name()));
+        transaction.setAmount(transactionRequest.getAmount());
+        transaction.setStatus(Transaction.TransactionStatus.valueOf(transactionRequest.getStatus().name()));
+        transaction.setDescription(transactionRequest.getDescription());
+
+        switch (transactionRequest.getTransactionType()) {
+            case CREDIT_DEPOSIT, CREDIT_PAYMENT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT ->
+                    transaction.setCreditId(transactionRequest.getCreditId());
+        }
+        return transaction;
     }
 
     public TransactionResponse mapToTransactionResponse(Transaction transaction) {
         TransactionResponse transactionResponse = new TransactionResponse();
         transactionResponse.setId(transaction.getId());
+        transactionResponse.setAccountNumber(transaction.getAccountNumber());
+        transactionResponse.setCreditId(transaction.getCreditId());
         transactionResponse.setTransactionType(TransactionResponse.TransactionTypeEnum.valueOf(transaction.getTransactionType().name()));
         transactionResponse.setCurrencyType(TransactionResponse.CurrencyTypeEnum.valueOf(transaction.getCurrencyType().name()));
         transactionResponse.setAmount(transaction.getAmount());

@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface TransactionService {
-    Flux<TransactionResponse> getTransactionsByBankProductId(String bankProductId);
+    Flux<TransactionResponse> getTransactionsByAccountNumber(String accountNumber);
     Mono<TransactionResponse> getTransactionById(String id);
     Mono<TransactionResponse> createTransaction(TransactionRequest transactionRequest);
     Mono<TransactionResponse> updateTransactionStatusByTransactionId(String transactionId, UpdateTransactionStatusRequest updateTransactionStatusRequest);

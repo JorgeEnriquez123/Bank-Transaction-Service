@@ -160,9 +160,15 @@ components:
         id:
           type: string
           description: ID de la transacción
+        accountNumber:
+          type: string
+          description: Numero de cuenta relacionado
+        creditId:
+          type: string
+          description: Id de crédito relacionado
         transactionType:
           type: string
-          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT]
+          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_DEPOSIT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT]
           description: Tipo de transacción
         currencyType:
           type: string
@@ -187,18 +193,22 @@ components:
     TransactionRequest:
       type: object
       required:
-        - bankProductId
+        - accountNumber
         - transactionType
         - currencyType
         - amount
+        - status
         - description
       properties:
-        bankProductId:
+        accountNumber:
           type: string
-          description: ID del producto bancario asociado
+          description: Numero de cuenta relacionado
+        creditId:
+          type: string
+          description: Id de crédito relacionado
         transactionType:
           type: string
-          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT]
+          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_DEPOSIT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT]
           description: Tipo de transacción
         currencyType:
           type: string
@@ -208,6 +218,10 @@ components:
           type: number
           format: decimal
           description: Monto de la transacción
+        status:
+          type: string
+          enum: [ PENDING, COMPLETED, FAILED ]
+          description: Estado de la transacción
         description:
           type: string
           description: Descripción de la transacción
