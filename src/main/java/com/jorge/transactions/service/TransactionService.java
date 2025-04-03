@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 public interface TransactionService {
     Flux<TransactionResponse> getTransactionsByAccountNumber(String accountNumber);
     Mono<TransactionResponse> getTransactionById(String id);
+    Flux<TransactionResponse> getTransactionsByCreditId(String creditId);
     Mono<TransactionResponse> createTransaction(TransactionRequest transactionRequest);
     Mono<TransactionResponse> updateTransactionStatusByTransactionId(String transactionId, UpdateTransactionStatusRequest updateTransactionStatusRequest);
 }

@@ -25,6 +25,8 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Flux<TransactionResponse> getTransactionsByAccountNumber(String accountNumber) {
         return transactionRepository.findByAccountNumber(accountNumber)
+                .switchIfEmpty(Mono.error(
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Transactions not found for account number: " + accountNumber)))
                 .map(transactionMapper::mapToTransactionResponse);
     }
 
@@ -33,6 +35,14 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionRepository.findById(id)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Movimiento con id: " + id + " no encontrado")))
+                .map(transactionMapper::mapToTransactionResponse);
+    }
+
+    @Override
+    public Flux<TransactionResponse> getTransactionsByCreditId(String creditId) {
+        return transactionRepository.findByCreditId((creditId))
+                .switchIfEmpty(Mono.error(
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Transactions not found for credit id: " + creditId)))
                 .map(transactionMapper::mapToTransactionResponse);
     }
 

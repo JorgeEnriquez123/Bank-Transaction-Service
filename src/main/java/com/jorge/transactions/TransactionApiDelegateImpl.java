@@ -22,6 +22,11 @@ public class TransactionApiDelegateImpl implements TransactionsApiDelegate {
     }
 
     @Override
+    public Flux<TransactionResponse> getTransactionsByCreditId(String creditId, ServerWebExchange exchange) {
+        return transactionService.getTransactionsByCreditId(creditId);
+    }
+
+    @Override
     public Mono<TransactionResponse> getTransactionById(String id, ServerWebExchange exchange) {
         return transactionService.getTransactionById(id);
     }
