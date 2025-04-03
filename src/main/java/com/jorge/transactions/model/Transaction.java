@@ -22,6 +22,7 @@ public class Transaction {
     //Credit field
     private String creditId;
 
+    private BigDecimal fee;
     private TransactionType transactionType;
     private CurrencyType currencyType;
     private BigDecimal amount;
@@ -37,7 +38,8 @@ public class Transaction {
         CREDIT_PAYMENT,
         CREDIT_DEPOSIT,
         CREDIT_CARD_CONSUMPTION,
-        CREDIT_CARD_PAYMENT
+        CREDIT_CARD_PAYMENT,
+        MAINTENANCE_FEE
     }
 
     public enum TransactionStatus {

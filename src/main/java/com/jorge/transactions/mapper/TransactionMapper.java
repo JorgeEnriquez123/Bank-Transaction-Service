@@ -18,6 +18,7 @@ public class TransactionMapper {
         transaction.setAmount(transactionRequest.getAmount());
         transaction.setStatus(Transaction.TransactionStatus.valueOf(transactionRequest.getStatus().name()));
         transaction.setDescription(transactionRequest.getDescription());
+        transaction.setFee(transactionRequest.getFee());
 
         switch (transactionRequest.getTransactionType()) {
             case CREDIT_DEPOSIT, CREDIT_PAYMENT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT ->
@@ -31,6 +32,7 @@ public class TransactionMapper {
         transactionResponse.setId(transaction.getId());
         transactionResponse.setAccountNumber(transaction.getAccountNumber());
         transactionResponse.setCreditId(transaction.getCreditId());
+        transactionResponse.setFee(transaction.getFee());
         transactionResponse.setTransactionType(TransactionResponse.TransactionTypeEnum.valueOf(transaction.getTransactionType().name()));
         transactionResponse.setCurrencyType(TransactionResponse.CurrencyTypeEnum.valueOf(transaction.getCurrencyType().name()));
         transactionResponse.setAmount(transaction.getAmount());

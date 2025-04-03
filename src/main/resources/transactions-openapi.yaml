@@ -166,9 +166,13 @@ components:
         creditId:
           type: string
           description: Id de crédito relacionado
+        fee:
+          type: number
+          format: decimal
+          description: Comisión de la transacción
         transactionType:
           type: string
-          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_DEPOSIT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT]
+          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_DEPOSIT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT, MAINTENANCE_FEE]
           description: Tipo de transacción
         currencyType:
           type: string
@@ -206,9 +210,13 @@ components:
         creditId:
           type: string
           description: Id de crédito relacionado
+        fee:
+          type: number
+          format: decimal
+          description: Comision de la transacción
         transactionType:
           type: string
-          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_DEPOSIT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT]
+          enum: [DEBIT, CREDIT, DEPOSIT, WITHDRAWAL, CREDIT_PAYMENT, CREDIT_DEPOSIT, CREDIT_CARD_CONSUMPTION, CREDIT_CARD_PAYMENT, MAINTENANCE_FEE]
           description: Tipo de transacción
         currencyType:
           type: string
