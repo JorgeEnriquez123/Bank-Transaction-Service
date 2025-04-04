@@ -8,6 +8,7 @@ import com.jorge.transactions.model.UpdateTransactionStatusRequest;
 import com.jorge.transactions.repository.TransactionRepository;
 import com.jorge.transactions.service.TransactionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,12 +19,14 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TransactionServiceImpl implements TransactionService {
     private final TransactionMapper transactionMapper;
     private final TransactionRepository transactionRepository;
 
     @Override
     public Flux<TransactionResponse> getTransactionsByAccountNumber(String accountNumber) {
+        log.info("Fetching transactions for account number: {}", accountNumber);
         return transactionRepository.findByAccountNumber(accountNumber)
                 .switchIfEmpty(Mono.error(
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Transactions not found for account number: " + accountNumber)))
@@ -32,6 +35,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Mono<TransactionResponse> getTransactionById(String id) {
+        log.info("Fetching transaction by id: {}", id);
         return transactionRepository.findById(id)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Movimiento con id: " + id + " no encontrado")))
@@ -40,6 +44,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Flux<TransactionResponse> getTransactionsByCreditId(String creditId) {
+        log.info("Fetching transactions for credit id: {}", creditId);
         return transactionRepository.findByCreditId((creditId))
                 .switchIfEmpty(Mono.error(
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Transactions not found for credit id: " + creditId)))
@@ -48,6 +53,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Mono<TransactionResponse> createTransaction(TransactionRequest transactionRequest) {
+        log.info("Creating a new transaction");
         Transaction transaction = transactionMapper.mapToTransaction(transactionRequest);
         transaction.setTransactionDate(LocalDateTime.now());
 
@@ -57,6 +63,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Mono<TransactionResponse> updateTransactionStatusByTransactionId(String transactionId, UpdateTransactionStatusRequest updateTransactionStatusRequest) {
+        log.info("Updating transaction status for transaction id: {}", transactionId);
         Mono<Transaction> transactionMono = transactionRepository.findById(transactionId)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Movimiento con id: " + transactionId + " no encontrado")));
